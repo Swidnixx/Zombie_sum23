@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        agent.updateRotation = false;
+       // agent.updateRotation = false;
     }
 
     private void Update()
@@ -26,4 +27,17 @@ public class Player : MonoBehaviour
         animator.SetFloat("speed", agent.velocity.magnitude);
         //Debug.Log("Speed: " + agent.velocity.magnitude);
     }
+
+    int health = 100;
+    internal void Damage()
+    {
+        health -= 50;
+
+        if(health <= 0)
+        {
+            health = 0;
+            Debug.Log("Game Over");
+        }
+    }
+
 }
