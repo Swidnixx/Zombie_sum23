@@ -7,11 +7,13 @@ public class Enemy : MonoBehaviour
     NavMeshAgent agent;
     int health = 30;
     public int dmg = 15;
+    Animator animator;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         player = FindObjectOfType<Player>().transform;
+        animator = GetComponent<Animator>();
 
        // agent.updatePosition = false;
     }
@@ -39,8 +41,9 @@ public class Enemy : MonoBehaviour
         health = health - dmg;
         if(health <= 0)
         {
+            animator.SetTrigger("Death");
             Debug.Log("Zombie Dead");
-            Destroy(gameObject);
+            Destroy(gameObject, 8);
         }
     }
 
