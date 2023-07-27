@@ -5,6 +5,8 @@ public class Enemy : MonoBehaviour
 {
     Transform player;
     NavMeshAgent agent;
+    int health = 30;
+    public int dmg = 15;
 
     private void Start()
     {
@@ -25,5 +27,21 @@ public class Enemy : MonoBehaviour
         {
             other.GetComponent<Player>().Damage();
         }
+        else if(other.CompareTag("Bullet"))
+        {
+            Damage(dmg);
+        }
+
     }
+
+    void Damage(int dmg)
+    {
+        health = health - dmg;
+        if(health <= 0)
+        {
+            Debug.Log("Zombie Dead");
+            Destroy(gameObject);
+        }
+    }
+
 }
